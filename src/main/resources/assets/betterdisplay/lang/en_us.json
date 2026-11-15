@@ -1,0 +1,14 @@
+{
+    "key.betterdisplay.toggle_hand_slots": "Toggle Hand Slots",
+    "key.betterdisplay.stash_hotbar": "Stash Hotbar to Backpack",
+    "key.betterdisplay.offhand_attack": "Offhand Attack",
+    "key.betterdisplay.offhand_use": "Offhand Use",
+    "screen.betterdisplay.inventory": "Better Display Inventory",
+    "sao.profile.level": "Level %s",
+    "sao.profile.experience": "EXP %s%%",
+    "sao.profile.health": "Health %s/%s",
+    "sao.profile.attack": "Attack %s",
+    "sao.profile.agility": "Agility %s",
+    "sao.profile.defense": "Defense %s",
+    "sao.profile.remote_hint": "Look at a teammate to see their menu panel"
+}

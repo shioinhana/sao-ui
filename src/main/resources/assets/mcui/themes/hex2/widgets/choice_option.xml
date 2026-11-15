@@ -1,0 +1,87 @@
+<bl:widget xmlns:bl="https://www.bluexin.be/be/bluexin/mcui/widget-schema-alpha" name="choice_option">
+    <expect>
+        <variable key="thisValue" type="STRING"/>
+        <variable key="translateValue" type="STRING">format(thisValue.replace(":", ".") + ".name")</variable>
+        <variable key="valueTooltip" type="STRING">format(thisValue.replace(":", ".") + ".description")</variable>
+        <variable key="initialWidth" type="INT" cache="STATIC">120</variable>
+        <variable key="initialHeight" type="INT" cache="STATIC">16</variable>
+        <variable key="xPos" type="DOUBLE" cache="STATIC">0.0</variable>
+        <variable key="yPos" type="DOUBLE" cache="STATIC">0.0</variable>
+        <variable key="colour" type="INT" cache="STATIC">0x424242FF</variable>
+        <variable key="hoverColour" type="INT" cache="STATIC">(int) (0x424242FF &amp; 0xAFAFAFFF)</variable>
+        <variable key="isHovered" type="BOOLEAN" cache="STATIC">false</variable>
+    </expect>
+    <contentWidth>initialWidth</contentWidth>
+    <contentHeight>initialHeight</contentHeight>
+    <x>xPos</x>
+    <y>yPos</y>
+    <z>isHovered? 10: 0</z>
+    <tooltip>valueTooltip</tooltip>
+    <children>
+        <elementGroup name="button">
+            <children>
+                <elementGroup name="bg">
+                    <x>isHovered? -initialWidth * 0.05: 0</x>
+                    <y>isHovered? -initialHeight * 0.05: 0</y>
+                    <scale>isHovered? 1.1: 1.0</scale>
+                    <texture>mcui:themes/hex2/textures/hex_labels.png</texture>
+                    <children>
+                        <glRectangle> <!-- left part of label -->
+                            <rgba>isHovered? hoverColour: colour</rgba>
+                            <srcX cache="STATIC">0.0</srcX>
+                            <srcY cache="STATIC">0.0</srcY>
+                            <srcW cache="STATIC">24.0</srcW>
+                            <srcH cache="STATIC">64.0</srcH>
+                            <w cache="STATIC">6</w>
+                            <h>initialHeight</h>
+                        </glRectangle>
+
+                        <glRectangle> <!-- middle part of label -->
+                            <rgba>isHovered? hoverColour: colour</rgba>
+                            <x cache="STATIC">6</x>
+                            <srcX cache="STATIC">24.0</srcX>
+                            <srcY cache="STATIC">0.0</srcY>
+                            <srcW cache="STATIC">26.0</srcW>
+                            <srcH cache="STATIC">64.0</srcH>
+                            <w>initialWidth - 12</w>
+                            <h>initialHeight</h>
+                        </glRectangle>
+
+                        <glRectangle> <!-- right part of label -->
+                            <rgba>isHovered? hoverColour: colour</rgba>
+                            <x>initialWidth - 6</x>
+                            <srcX cache="STATIC">50.0</srcX>
+                            <srcY cache="STATIC">0.0</srcY>
+                            <srcW cache="STATIC">24.0</srcW>
+                            <srcH cache="STATIC">64.0</srcH>
+                            <w cache="STATIC">6</w>
+                            <h>initialHeight</h>
+                        </glRectangle>
+                    </children>
+                </elementGroup>
+                <glString name="label">
+                    <x>initialWidth / 2 - strWidth(translateValue) / 2</x>
+                    <y cache="STATIC">9.5</y>
+                    <text>translateValue</text>
+                </glString>
+            </children>
+        </elementGroup>
+    </children>
+
+    <onClick>
+        local self = --[[---@type Widget]]...
+        -- direct parent is the content widget of the choice button
+        local parent = --[[---@type Widget]] self.parentElement.parentElement
+        -- safety check to make sure this wasn't included in some odd place
+        if type(parent) == 'Widget' and parent.extra.setValue then
+            parent.extra.setValue(self.getVariable('thisValue'))
+        end
+
+        return true
+    </onClick>
+
+    <onMouseOver>
+        local button, _, _, entered = ...
+        button.setVariable('isHovered', { type = 'BOOLEAN', expression = tostring(entered), cache = 'STATIC' })
+    </onMouseOver>
+</bl:widget>

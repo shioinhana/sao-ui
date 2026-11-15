@@ -1,0 +1,31 @@
+# Better Display — mod metadata
+# NOTE: this file must contain literal values. MDK-style template placeholders
+# inside keys/values are NOT substituted at runtime; a stray one makes FML fail
+# with "Invalid bare key".
+modLoader="javafml"
+loaderVersion="[61,)"
+license="All Rights Reserved"
+issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
+clientSideOnly=false
+
+[[mods]]
+modId="betterdisplay"
+version="1.2.3"
+displayName="Better Display"
+authors="云端像素"
+displayTest="MATCH_VERSION"
+description='''SAO style client inventory display with remote (multiplayer) menu panels.'''
+
+[[dependencies.betterdisplay]]
+    modId="forge"
+    mandatory=true
+    versionRange="[61,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.betterdisplay]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.21.11,1.22)"
+    ordering="NONE"
+    side="BOTH"

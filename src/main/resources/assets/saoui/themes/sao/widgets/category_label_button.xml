@@ -1,0 +1,82 @@
+<bl:widget xmlns:bl="https://www.bluexin.be/be/bluexin/mcui/widget-schema-alpha" name="category_label_button">
+    <expect>
+        <variable key="text" type="STRING"/>
+        <variable key="initialWidth" type="INT" cache="STATIC">120</variable>
+        <variable key="initialHeight" type="INT" cache="STATIC">18</variable>
+        <variable key="xPos" type="DOUBLE" cache="STATIC">0.0</variable>
+        <variable key="yPos" type="DOUBLE" cache="STATIC">0.0</variable>
+        <variable key="active" type="BOOLEAN" cache="STATIC">true</variable>
+        <variable key="colour" type="INT" cache="STATIC">0xFFFFFFFF</variable>
+        <variable key="hoverColour" type="INT" cache="STATIC">0xC99B13FF</variable>
+        <variable key="isHovered" type="BOOLEAN" cache="STATIC">false</variable>
+        <variable key="isOpen" type="BOOLEAN" cache="STATIC">false</variable>
+    </expect>
+    <contentWidth>initialWidth</contentWidth>
+    <contentHeight>initialHeight</contentHeight>
+    <active>active</active>
+    <x>xPos</x>
+    <y>yPos</y>
+    <z>isHovered? 10: isOpen? 1: 0</z>
+    <children>
+        <widget name="content">
+            <x>initialWidth + 6</x>
+            <y cache="STATIC">0</y>
+            <enabled>isOpen</enabled>
+            <contentWidth cache="STATIC">0</contentWidth>
+            <contentHeight cache="STATIC">0</contentHeight>
+        </widget>
+
+        <glRectangle>
+            <x>isHovered? -initialWidth * 0.05: 0</x>
+            <y>isHovered? -initialHeight * 0.05: 0</y>
+            <scale>isHovered? 1.1: 1.0</scale>
+            <rgba>(isHovered || isOpen)? hoverColour: colour</rgba>
+            <srcX cache="STATIC">0.0</srcX>
+            <srcY cache="STATIC">40.0</srcY>
+            <srcW cache="STATIC">84.0</srcW>
+            <srcH cache="STATIC">18.0</srcH>
+            <w>initialWidth</w>
+            <h>initialHeight</h>
+            <texture>saoui:themes/sao/textures/slot.png</texture>
+        </glRectangle>
+        <glString name="label">
+            <x>initialWidth / 2 - strWidth(text) / 2</x>
+            <y cache="STATIC">10</y>
+            <text>text</text>
+            <rgba>(isHovered || isOpen)? 0xFFFFFFFF: 0x888888FF</rgba>
+            <shadow>isHovered || isOpen</shadow>
+        </glString>
+    </children>
+
+    <onClick>
+        --- @type Widget
+        local self = ...
+        local isOpen = self.getVariable('isOpen')
+        isOpen.expression = string.gsub('!' .. isOpen.expression, '!!', '')
+        self.setVariable('isOpen', isOpen)
+        --- @type Element[]
+        local peers = self.peers
+        for _, peer in ipairs(peers) do
+            if type(peer) == 'Widget' then
+                if peer.getVariable('isOpen') then
+                    peer.setVariable('isOpen', { type = 'BOOLEAN', expression = 'false', cache = 'STATIC' })
+                end
+            end
+        end
+        return true
+    </onClick>
+
+    <onMouseOver>
+        local button, _, _, entered = ...
+        button.setVariable('isHovered', { type = 'BOOLEAN', expression = tostring(entered), cache = 'STATIC' })
+    </onMouseOver>
+
+    <extra>
+        <value key="test1">return 3</value>
+        <value key="test2">
+            return function()
+                print 'hello from extra'
+            end
+        </value>
+    </extra>
+</bl:widget>

@@ -1,0 +1,14 @@
+{
+    "key.betterdisplay.toggle_hand_slots": "切换双手装备",
+    "key.betterdisplay.stash_hotbar": "收纳快捷栏到背包",
+    "key.betterdisplay.offhand_attack": "副手攻击",
+    "key.betterdisplay.offhand_use": "副手使用",
+    "screen.betterdisplay.inventory": "更好的背包",
+    "sao.profile.level": "等级 %s",
+    "sao.profile.experience": "经验 %s%%",
+    "sao.profile.health": "生命 %s/%s",
+    "sao.profile.attack": "攻击 %s",
+    "sao.profile.agility": "敏捷 %s",
+    "sao.profile.defense": "防御 %s",
+    "sao.profile.remote_hint": "对着队友时显示其菜单面板"
+}

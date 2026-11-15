@@ -1,0 +1,29 @@
+{
+  "menu_open": {
+    "category": "ui",
+    "sounds": [
+      {
+        "name": "betterdisplay:menu_open",
+        "stream": false
+      }
+    ]
+  },
+  "menu_select": {
+    "category": "ui",
+    "sounds": [
+      {
+        "name": "betterdisplay:menu_select",
+        "stream": false
+      }
+    ]
+  },
+  "equip": {
+    "category": "ui",
+    "sounds": [
+      {
+        "name": "betterdisplay:equip",
+        "stream": false
+      }
+    ]
+  }
+}

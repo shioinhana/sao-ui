@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:bl="http://www.bluexin.be/com/saomc/saoui/fragment-schema"
+           targetNamespace="http://www.bluexin.be/com/saomc/saoui/hud-schema">
+
+    <xs:element name="hud">
+        <xs:annotation>
+            <xs:documentation>Root element, used as 'bl:hud'.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="version" default="unknown" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Version string</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="parts">
+                    <xs:annotation>
+                        <xs:documentation>List of parts for the hud. See documentation of HudPart.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence maxOccurs="unbounded">
+                            <xs:element name="entry" type="HudPart"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="HudPart">
+        <xs:annotation>
+            <xs:documentation>
+                Represents a part of the HUD, like the health box or the hotbar.
+                The key specifies when they will be rendered, please use the right parts as much as possible (helps for
+                profiling).
+                The part is made up of an ElementGroup (see it's documentation for more info).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="key">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="HEALTH_BOX"/>
+                        <xs:enumeration value="HOTBAR"/>
+                        <xs:enumeration value="EXPERIENCE"/>
+                        <xs:enumeration value="CROSS_HAIR"/>
+                        <xs:enumeration value="ARMOR"/>
+                        <xs:enumeration value="JUMP_BAR"/>
+                        <xs:enumeration value="AM2BARS"/>
+                        <xs:enumeration value="PARTY"/>
+                        <xs:enumeration value="FOOD"/>
+                        <xs:enumeration value="EFFECTS"/>
+                        <xs:enumeration value="ENTITY_HEALTH_HUD"/>
+                        <xs:enumeration value="AIR"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="value" type="bl:ElementGroup"/>
+        </xs:all>
+    </xs:complexType>
+</xs:schema>

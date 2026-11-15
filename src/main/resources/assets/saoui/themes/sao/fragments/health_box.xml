@@ -1,0 +1,126 @@
+<bl:fragment xmlns:bl="https://www.bluexin.be/be/bluexin/mcui/fragment-schema-alpha" name="health box fragment">
+    <x>settings.double("hud:health_offset_x")</x>
+    <y>settings.double("hud:health_offset_y")</y>
+    <expect>
+        <variable key="hpWithoutAbsorptionText" type="STRING">format("formatHealth", ceil(player.health),
+            ceil(player.maxHealth))
+        </variable>
+        <variable key="hpWithAbsorptionText" type="STRING">format(isEnabled(ALT_ABSORB_POS)? "formatHealthAbsorbAlt":
+            "formatHealthAbsorb", ceil(player.health), ceil(player.maxHealth), ceil(player.absorption))
+        </variable>
+        <variable key="hpText" type="STRING">player.absorption > 0? hpWithAbsorptionText: hpWithoutAbsorptionText
+        </variable>
+    </expect>
+    <children>
+        <elementGroup name="background">
+            <texture>saoui:textures/sao/gui.png</texture>
+            <children>
+                <glRectangle>
+                    <h cache="STATIC">15.0</h>
+                    <w cache="STATIC">16.0</w>
+                </glRectangle>
+                <glRectangle>
+                    <h cache="STATIC">15.0</h>
+                    <srcW cache="STATIC">5.0</srcW>
+                    <srcX cache="STATIC">16.0</srcX>
+                    <w>strWidth(player.displayName)</w>
+                    <x cache="STATIC">16.0</x>
+                </glRectangle>
+                <glRectangle>
+                    <h cache="STATIC">15.0</h>
+                    <srcX cache="STATIC">21.0</srcX>
+                    <w cache="STATIC">234.0</w>
+                    <x>16.0 + strWidth(player.displayName)</x>
+                </glRectangle>
+            </children>
+        </elementGroup>
+        <glString name="username">
+            <text>player.displayName</text>
+            <h cache="STATIC">15.0</h>
+            <x cache="STATIC">14.0</x>
+            <y cache="STATIC">1.0</y>
+        </glString>
+        <glRectangle name="health bar">
+            <texture>saoui:textures/sao/gui.png</texture>
+            <h cache="STATIC">9.0</h>
+            <rgba>player.healthStep.rgba</rgba>
+            <srcH cache="STATIC">9.0</srcH>
+            <srcW>215.0 * player.healthPercent</srcW>
+            <srcY cache="STATIC">188.0</srcY>
+            <w>215.0 * player.healthPercent</w>
+            <x>18.0 + strWidth(player.displayName)</x>
+            <y cache="STATIC">3.0</y>
+        </glRectangle>
+        <glRectangle name="air bar">
+            <texture>saoui:textures/sao/gui.png</texture>
+            <h cache="STATIC">9.0</h>
+            <rgba>player.healthStep == CREATIVE? 0x00000000:
+                player.statusEffects.contains(WET)? 0x2ADDF580:
+                0x00000000
+            </rgba>
+            <srcH cache="STATIC">9.0</srcH>
+            <srcW>215.0 * player.airPercent</srcW>
+            <srcY cache="STATIC">188.0</srcY>
+            <w>215.0 * player.airPercent</w>
+            <x>18.0 + strWidth(player.displayName)</x>
+            <y cache="STATIC">3.0</y>
+        </glRectangle>
+        <glRectangle name="hunger bar">
+            <texture>saoui:textures/sao/gui.png</texture>
+            <h cache="STATIC">2.0</h>
+            <rgba>player.healthStep == CREATIVE? 0xCD840400:
+                player.statusEffects.contains(ROTTEN)? 0xD045FFFF:
+                0xF5AB2AFF
+            </rgba>
+            <srcH cache="STATIC">2.0</srcH>
+            <srcW>115.0 * player.foodPercent</srcW>
+            <srcY cache="STATIC">193.0</srcY>
+            <w>113.0 * player.foodPercent</w>
+            <x>18.0 + strWidth(player.displayName)</x>
+            <y cache="STATIC">10.0</y>
+        </glRectangle>
+        <elementGroup name="hp bg and text">
+            <enabled>!settings.boolean("hud:remove_hpxp")</enabled>
+            <x>strWidth(player.displayName) + 132.0</x>
+            <y cache="STATIC">12.0</y>
+            <children>
+                <glString name="hp text">
+                    <text>hpText</text>
+                    <x cache="STATIC">5.0</x>
+                    <y cache="STATIC">8.0</y>
+                </glString>
+                <elementGroup name="hp bg">
+                    <texture>saoui:textures/sao/gui.png</texture>
+                    <children>
+                        <glRectangle>
+                            <srcX cache="STATIC">60.0</srcX>
+                            <srcY cache="STATIC">15.0</srcY>
+                            <w cache="STATIC">5.0</w>
+                            <h cache="STATIC">13.0</h>
+                        </glRectangle>
+                        <glRectangle>
+                            <x cache="STATIC">5.0</x>
+                            <srcX cache="STATIC">66.0</srcX>
+                            <srcY cache="STATIC">15.0</srcY>
+                            <w>strWidth(hpText)</w>
+                            <h cache="STATIC">13.0</h>
+                            <srcW cache="STATIC">5.0</srcW>
+                            <srcH cache="STATIC">13.0</srcH>
+                        </glRectangle>
+                        <glRectangle>
+                            <x>5 + strWidth(hpText)</x>
+                            <srcX cache="STATIC">70.0</srcX>
+                            <srcY cache="STATIC">15.0</srcY>
+                            <w cache="STATIC">5.0</w>
+                            <h cache="STATIC">13.0</h>
+                        </glRectangle>
+                    </children>
+                </elementGroup>
+            </children>
+        </elementGroup>
+        <fragmentReference id="saoui.sao:experience">
+            <x>strWidth(player.displayName) + 132.0 + 10.0 + strWidth(hpText)</x>
+            <y cache="STATIC">12.0</y>
+        </fragmentReference>
+    </children>
+</bl:fragment>

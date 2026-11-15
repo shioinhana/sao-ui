@@ -1,0 +1,11 @@
+/build/
+/logs/
+/src-original-backup/
+/dist/*
+!/dist/sao-ui-1.21.11-forge-1.2.3.jar
+!/dist/sao-ui-1.21.11-forge-1.2.3-source.zip
+!/dist/sao-ui-1.2.3-SHA256SUMS.txt
+__pycache__/
+*.pyc
+*.old
+*.old.png

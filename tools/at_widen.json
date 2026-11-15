@@ -1,0 +1,19 @@
+{
+  "members": [
+    { "class": "net/minecraft/client/player/ClientInput", "name": "moveVector", "kind": "field" },
+    { "class": "net/minecraft/client/gui/screens/inventory/AbstractContainerScreen", "name": "renderSlotHighlightBack", "kind": "method" },
+    { "class": "net/minecraft/client/gui/screens/inventory/AbstractContainerScreen", "name": "renderSlotHighlightFront", "kind": "method" },
+    { "class": "net/minecraft/world/entity/LivingEntity", "name": "attackStrengthTicker", "kind": "field" }
+  ],
+  "implements": [
+    { "iface": "net/minecraftforge/common/extensions/IForgeEntity", "class": "net/minecraft/world/entity/Entity" },
+    { "iface": "net/minecraftforge/common/extensions/IForgeLivingEntity", "class": "net/minecraft/world/entity/LivingEntity" },
+    { "iface": "net/minecraftforge/common/extensions/IForgePlayer", "class": "net/minecraft/world/entity/player/Player" },
+    { "iface": "net/minecraftforge/common/extensions/IForgeServerPlayer", "class": "net/minecraft/server/level/ServerPlayer" },
+    { "iface": "net/minecraftforge/common/extensions/IForgeItemStack", "class": "net/minecraft/world/item/ItemStack" },
+    { "iface": "net/minecraftforge/common/extensions/IForgeItem", "class": "net/minecraft/world/item/Item" },
+    { "iface": "net/minecraftforge/client/extensions/IForgeKeyMapping", "class": "net/minecraft/client/KeyMapping" },
+    { "iface": "net/minecraftforge/common/extensions/IForgeLevel", "class": "net/minecraft/world/level/Level" },
+    { "iface": "net/minecraftforge/common/extensions/IForgeBlockState", "class": "net/minecraft/world/level/block/state/BlockState" }
+  ]
+}
